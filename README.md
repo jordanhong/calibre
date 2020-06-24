@@ -1,5 +1,33 @@
 # calibre
 
+## Forked Version of Calibre
+
+### Background
+The original program automatically translates non-ASCII filenames into English. In my case, all Chinese file names and authors are translated into Pinyin when added to my local library. 
+
+### Changes
+
+File: `src/calibre/db/backend.py`
+Function: `construct_file_name`
+
+```
+-        author = ascii_filename(author)[:l]
+-        title  = ascii_filename(title.lstrip())[:l].rstrip()
++        author = author[:l]
++        title  = title.lstrip()[:l].rstrip()
+```
+
+### Recompiling:
+After changing the code, run 
+1. `cd src && python2 -O -m compileall .` 
+2. Update: `cp ./calibre/db/backend.pyo /Applications/calibre.app/Contents/Resources/Python/site-packages/calibre/db/backend.pyo`
+
+### Tested Platform
+macOS Catalina 10.15.3
+### Reference
+[calibre修改倉庫存儲的文件名支持中文](https://www.jianshu.com/p/e108807318e8)
+
+## Original README page
 <img align="left" src="resources/images/lt.png?raw=true" height="200" width="200"/>
 
 calibre is an e-book manager. It can view, convert, edit and catalog e-books 
